@@ -126,3 +126,34 @@ func (v *VisorDevice) Cylon() {
 
 	v.Show()
 }
+
+
+// Rainbow visor mode.
+// TODO: Add rainbow cascade
+func (v *VisorDevice) Rainbow() {
+	var r map[int]color.RGBA
+	r = make(map[int]color.RGBA)
+	r[0] = {R: 0xff, G: 0xff, B: 0xff} // White
+	r[1] = {R: 0xff, G: 0xff, B: 0x7f}
+	r[2] = {R: 0xff, G: 0xff, B: 0x00} // Yellow
+	r[3] = {R: 0xff, G: 0x99, B: 0x33}
+	r[4] = {R: 0xff, G: 0x7f, B: 0x00} // Orange
+	r[5] = {R: 0xff, G: 0x33, B: 0x11}
+	r[6] = {R: 0xff, G: 0x00, B: 0x00} // Red
+	r[7] = {R: 0xff, G: 0x00, B: 0x7f} // Pink
+	r[8] = {R: 0x94, G: 0x00, B: 0xd3} // Violet
+	r[9] = {R: 0x44, G: 0x22, B: 0x99}
+	r[10] = {R: 0x4b, G: 0xff, B: 0x82} // Indigo
+	r[11] = {R: 0x00, G: 0x00, B: 0xff} // Blue
+	r[12] = {R: 0x44, G: 0x44, B: 0xff} // Periwinkle
+	r[13] = {R: 0x11, G: 0xaa, B: 0xbb} // Teal
+	r[14] = {R: 0x00, G: 0xff, B: 0x00} // Green
+	r[15] = {R: 0x69, G: 0xd0, B: 0x25}
+
+	// For each position, choose the previous color
+	for i := 0; i < VisorLEDCount; i += 1 {
+		v.LED[i] = r[i]
+	}
+
+	v.Show()
+}

@@ -3,7 +3,7 @@ package main
 import (
 	"time"
 
-	"github.com/hybridgroup/gopherbot"
+	"github.com/axiomista/gopherbot"
 )
 
 const (

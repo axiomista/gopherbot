@@ -4,7 +4,7 @@ import (
 	"image/color"
 	"time"
 
-	"github.com/hybridgroup/gopherbot"
+	"github.com/axiomista/gopherbot"
 )
 
 const (

@@ -74,6 +74,15 @@ func (v *VisorDevice) Blue() {
 	v.Show()
 }
 
+// Purple turns all of the Visor LEDs purple.
+func (v *VisorDevice) Purple() {
+	for i := range v.LED {
+		v.LED[i] = color.RGBA{R: 0x80, G: 0x00, B: 0x80}
+	}
+
+	v.Show()
+}
+
 // Xmas light style
 func (v *VisorDevice) Xmas() {
 	v.rg = !v.rg

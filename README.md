@@ -12,7 +12,7 @@ package main
 import (
 	"time"
 
-	"github.com/hybridgroup/gopherbot"
+	"github.com/axiomista/gopherbot"
 )
 
 func main() {
@@ -76,7 +76,7 @@ go get -u tinygo.org/x/drivers
 Lastly, get the code from this repository:
 
 ```
-git clone https://github.com/hybridgroup/gopherbot.git
+git clone https://github.com/axiomista/gopherbot.git
 cd gopherbot
 ```
 
@@ -90,8 +90,14 @@ Here is what to do:
 
 - Plug your Circuit Playground Express into your computer's USB port.
 - Press the "RESET" button on the board two times to get the Circuit Playground Express board ready to receive code. You have to do this every time you want to put new code on to the board.
-- The Circuit Playground Express board will appear to your computer like a USB drive. Determine the path to the board, for example on Linux it will be something like `/media/[USERNAME]/[NAME OF THE BOARD]`.
-- Build your TinyGo program to the board in `.uf2` format using this command:
+- The Circuit Playground Express board will appear to your computer like a USB drive. 
+Determine the path to the board: 
+
+On Linux it will be something like `/media/[USERNAME]/[NAME OF THE BOARD]`
+
+On OSX you'll probably see `/Volumes/[NAME OF THE BOARD]`
+
+Build your TinyGo program to the board in `.uf2` format using this command:
 
 ```shell
 tinygo build -size short -o /media/yourname/CPLAYBOOT/flash.uf2 -target=circuitplay-express examples/blinky1

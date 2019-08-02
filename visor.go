@@ -134,26 +134,31 @@ func (v *VisorDevice) Rainbow() {
 	var r map[int]color.RGBA
 	r = make(map[int]color.RGBA)
 	r[0] = color.RGBA{R: 0xff, G: 0xff, B: 0xff} // White
-	r[1] = color.RGBA{R: 0xff, G: 0xff, B: 0x7f}
-	r[2] = color.RGBA{R: 0xff, G: 0xff, B: 0x00} // Yellow
-	r[3] = color.RGBA{R: 0xff, G: 0x99, B: 0x33}
-	r[4] = color.RGBA{R: 0xff, G: 0x7f, B: 0x00} // Orange
-	r[5] = color.RGBA{R: 0xff, G: 0x33, B: 0x11}
-	r[6] = color.RGBA{R: 0xff, G: 0x00, B: 0x00} // Red
-	r[7] = color.RGBA{R: 0xff, G: 0x00, B: 0x7f} // Pink
-	r[8] = color.RGBA{R: 0x94, G: 0x00, B: 0xd3} // Violet
-	r[9] = color.RGBA{R: 0x44, G: 0x22, B: 0x99}
-	r[10] = color.RGBA{R: 0x4b, G: 0xff, B: 0x82} // Indigo
-	r[11] = color.RGBA{R: 0x00, G: 0x00, B: 0xff} // Blue
-	r[12] = color.RGBA{R: 0x44, G: 0x44, B: 0xff} // Periwinkle
-	r[13] = color.RGBA{R: 0x11, G: 0xaa, B: 0xbb} // Teal
-	r[14] = color.RGBA{R: 0x00, G: 0xff, B: 0x00} // Green
-	r[15] = color.RGBA{R: 0x69, G: 0xd0, B: 0x25}
+	r[1] = color.RGBA{R: 0xff, G: 0xff, B: 0x00} // Yellow
+	r[2] = color.RGBA{R: 0xff, G: 0x7f, B: 0x00} // Orange
+	r[3] = color.RGBA{R: 0xff, G: 0x00, B: 0x00} // Red
+	r[4] = color.RGBA{R: 0xff, G: 0x00, B: 0x7f} // Pink
+	r[5] = color.RGBA{R: 0x94, G: 0x00, B: 0xd3} // Violet
+	r[6] = color.RGBA{R: 0x4b, G: 0x00, B: 0x82} // Indigo
+	r[7] = color.RGBA{R: 0x00, G: 0x00, B: 0xff} // Blue
+	r[8] = color.RGBA{R: 0x44, G: 0x44, B: 0xff} // Periwinkle
+	r[9] = color.RGBA{R: 0x11, G: 0xaa, B: 0xbb} // Teal
+	r[10] = color.RGBA{R: 0x00, G: 0xff, B: 0x00} // Green
+	r[11] = color.RGBA{R: 0x69, G: 0xd0, B: 0x25} // ?
+	m := len(r)
 
-	// For each position, choose the previous color
+	// For each position, choose a color in the map
 	for i := 0; i < VisorLEDCount; i ++ {
-		v.LED[i] = r[i]
+		v.LED[i] = r[i%m]
 	}
 
-	v.Show()
+	// Iterate through the map and move the colors over forever
+	for {
+		for j := range v.LED {
+			v.LED[j] = v.LED[(j+1)%VisorLEDCount]
+			if j == VisorLEDCount-1 { j = -1 }
+		}
+		v.Show()
+	}
+
 }

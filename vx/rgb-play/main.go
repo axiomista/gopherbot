@@ -20,7 +20,7 @@ func main() {
 
 	go antenna.Blink()
 
-	visor.Purple()
+	visor.Rainbow()
 	backpack.Alternate(color.RGBA{R: 0x80, G: 0x00, B: 0x80}, color.RGBA{R: 0xff, G: 0xa5, B: 0x00})
 	time.Sleep(200 * time.Millisecond)
 

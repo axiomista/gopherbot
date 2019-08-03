@@ -3,7 +3,6 @@ package gopherbot
 import (
 	"image/color"
 	"machine"
-	"time"
 
 	"tinygo.org/x/drivers/ws2812"
 )
@@ -142,8 +141,12 @@ func (v *VisorDevice) Rainbow() {
 	r[3] = color.RGBA{R: 0xff, G: 0x00, B: 0x00} // Red
 	r[4] = color.RGBA{R: 0xff, G: 0x00, B: 0x7f} // Pink
 	r[5] = color.RGBA{R: 0x94, G: 0x00, B: 0xd3} // Violet
-	r[6] = color.RGBA{R: 0x00, G: 0x00, B: 0xff} // Blue
-	r[7] = color.RGBA{R: 0x00, G: 0xff, B: 0x00} // Green
+	r[6] = color.RGBA{R: 0x4b, G: 0x00, B: 0x82} // Purple
+	r[7] = color.RGBA{R: 0x00, G: 0x00, B: 0xff} // Blue
+	r[8] = color.RGBA{R: 0x46, G: 0xf0, B: 0xf0} // Cyan
+	r[9] = color.RGBA{R: 0x00, G: 0x98, B: 0x88} // Teal
+	r[10] = color.RGBA{R: 0x00, G: 0xff, B: 0x00} // Green
+	r[11] = color.RGBA{R: 0xbc, G: 0xf6, B: 0x0c} // Lime
 	m := len(r)
 
 	// For each position, choose a color in the map
@@ -151,14 +154,4 @@ func (v *VisorDevice) Rainbow() {
 		v.LED[i] = r[i%m]
 	}
 	v.Show()
-
-	// Iterate through the map and move the colors over forever, waiting 200ms
-	for {
-		for j := range v.LED {
-			v.LED[j] = v.LED[(j+1)%VisorLEDCount]
-			if j == VisorLEDCount-1 { j = -1 }
-		}
-		v.Show()
-		time.Sleep(200 * time.Millisecond)
-	}
 }

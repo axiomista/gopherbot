@@ -1,1 +1,1 @@
-tinygo build -size short -o /Volumes/CPLAYBOOT/flash.uf2 -target=circuitplay-express ./vx/rgb-play/main.go
+tinygo build -size short -o /Volumes/CPLAYBOOT/flash.uf2 -target=circuitplay-express ./vx/main.go
